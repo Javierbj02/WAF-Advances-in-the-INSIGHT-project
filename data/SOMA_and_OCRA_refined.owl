@@ -1,0 +1,2281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+   xmlns:SOMA="http://www.ease-crc.org/ont/SOMA.owl#"
+   xmlns:owl="http://www.w3.org/2002/07/owl#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+>
+  <rdf:Description rdf:about="http://www.iri.upc.edu/groups/perception/OCRA/ont/ocra.owl#hasGoal">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#associatedWith"/>
+    <owl:inverseOf rdf:resource="http://www.iri.upc.edu/groups/perception/OCRA/ont/ocra.owl#isGoalOf"/>
+    <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
+    <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Goal"/>
+    <rdfs:comment xml:lang="en">The relation holding between any Agent, and a Goal desired by the Agent.</rdfs:comment>
+    <rdfs:label xml:lang="en">has goal</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Na75f8433ff814b0fb1f99d21720d0863">
+    <owl:onProperty rdf:resource="http://www.iri.upc.edu/groups/perception/OCRA/ont/ocra.owl#hasPlan"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Plan"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ndcf7b0edda78452bb0e9076ab2ce5e56">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isClassifiedBy"/>
+    <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#CommunicationTask"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N03a18d495e49434694c3362f8cdc2b7a">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isExpressedBy"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N6de146e087024f89a42a5735458f7df5">
+    <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Collection"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isMemberOf"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N13753aef230b47cdb0de9c5eda1df45e">
+    <owl:onProperty rdf:resource="http://www.iri.upc.edu/groups/perception/OCRA/ont/ocra.owl#hasPlan"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Plan"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N0a84e2a4aaa44d8094e44c5670e25454">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPart"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:someValuesFrom rdf:nodeID="N8041ddf546a64109b07d8387f11b71ba"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPart">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ReflexiveProperty"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#associatedWith"/>
+    <owl:inverseOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isPartOf"/>
+    <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+    <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+    <owl:propertyChainAxiom rdf:nodeID="N65ed701685f841f8b3ffc6f8e50872e6"/>
+    <rdfs:comment>A schematic relation between any entities, e.g. 'the human body has a brain as part', '20th century contains year 1923', 'World War II includes the Pearl Harbour event'.
+
+Parthood should assume the basic properties of mereology: transitivity, antisymmetry, and reflexivity (propert Parthood of course misses reflexivity). 
+However, antisymmetry is not supported in OWL2 explicitly, therefore DUL has to adopt one of two patterns:
+1) dropping asymmetry axioms, while granting reflexivity: this means that symmetry is not enforced, but permitted for the case of reflexivity. Of course, in this way we cannot prevent symmetric usages of hasPart;
+2) dropping the reflexivity axiom, and enforce asymmetry: in this case, we would prevent all symmetric usages, but we loose the possibility of enforcing reflexivity, which is commonsensical in parthood.
+In DUL, we adopt pattern #1 for partOf, and pattern #2 for properPartOf, which seems a good approximation: due to the lack of inheritance of property characteristics, each asymmetric hasPropertPart assertion would also be a reflexive hasPart assertion (reflexive reduction design pattern).
+
+Subproperties and restrictions can be used to specialize hasPart for objects, events, etc.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/DUL.owl"/>
+    <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-PROC.owl"/>
+    <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-STATE.owl"/>
+    <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-WF.owl"/>
+    <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA.owl"/>
+    <rdfs:isDefinedBy rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl"/>
+    <rdfs:label xml:lang="en">has part</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N7929b54313c84f1bb66dfe1bd9ed93ff">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationRealization"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N4f02ce0de0f3471dbe1bb5804baaa260">
+    <rdf:first rdf:nodeID="N269e6842f46f4ea899f57edc529861ad"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#directlyCauses">
+    <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#causes"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isDirectReactionTo"/>
+    <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+    <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+    <owl:propertyChainAxiom rdf:nodeID="Nf1914d82f522428792b88d9f99b60a99"/>
+    <rdfs:comment xml:lang="en">Non-transitive version of "causes".</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-ACT.owl"/>
+    <rdfs:label xml:lang="en">directly causes</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstraint">
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isClassifiedBy"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nb4e5c8378dce44eea80071fa2dd3f7dd">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nb869b3f199f04a9e8c86f5c31a4771ca">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <owl:unionOf rdf:nodeID="Na56ff15a217d47d089273fafd9c28919"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N8606703f92cb4db6951baf829e51274d">
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    <rdf:first rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isAnsweredBy">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#involvesAgent"/>
+    <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+    <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
+    <rdfs:comment>A relation from a Query to an Agent who answers it.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-SAY.owl"/>
+    <rdfs:label>is answered by</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nbc81694caa2a43c1a470adfbbe08de86">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasLocation"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N7f856535874e44b9bcf294d87f10a1b5">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.iri.upc.edu/groups/perception/OCRA/ont/ocra.owl#Collaboration"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N8e58b93081034cfc904ec6a90cc8a61a">
+    <owl:onProperty rdf:resource="http://www.iri.upc.edu/groups/perception/OCRA/ont/ocra.owl#hasGoal"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Goal"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nd718cc6fc0b34f13b10210379043d54e">
+    <owl:intersectionOf rdf:nodeID="Nd5a202a38bdb46b59bab346a2a06a369"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N5ff18ce69c5b4059bd217da5fb1a49ee">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Cleanliness"/>
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isRegionFor"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N870be3ff81884471a9752ce27e41c30d">
+    <owl:allValuesFrom rdf:nodeID="N24e37edf198a4450847f5a2d4068f8a0"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isReactionTo"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N361381a70df94c0fa92d037eb9be6120">
+    <rdf:first rdf:nodeID="Nb68ebf90ec464683a165a161bcbb9b1e"/>
+    <rdf:rest rdf:nodeID="Ne972fcca8f83450288509a7d54292157"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nbf2c51bb6d2041a8bfd35dcbc09c36ae">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDefinedIn"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#InterfaceSpecification"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationEntity">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Na4c5d32eb3a243a29d0007e3e8440561">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPart"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#associatedWith"/>
+    <owl:inverseOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParticipantIn"/>
+    <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+    <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Object"/>
+    <rdfs:comment>A relation between an object and a process, e.g. 'John took part in the discussion', 'a large mass of snow fell during the avalanche', or 'a cook, some sugar, flour, etc. are all present in the cooking of a cake'.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/DUL.owl"/>
+    <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-PROC.owl"/>
+    <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-STATE.owl"/>
+    <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA.owl"/>
+    <rdfs:isDefinedBy rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl"/>
+    <rdfs:label xml:lang="en">has participant</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N646bdd98235141b1b8c6897bf313117a">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <owl:unionOf rdf:nodeID="N1a04bf0576d44f338caf4f471f3e5652"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nc887633ccbb64077a5c7c2c12a6db229">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+    <owl:allValuesFrom rdf:nodeID="N646bdd98235141b1b8c6897bf313117a"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#executesTask">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isOccurrenceOf"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isClassifiedBy"/>
+    <owl:inverseOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isExecutedIn"/>
+    <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
+    <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
+    <rdfs:comment>A relation between an action and a task, e.g. 'putting some water in a pot and putting the pot on a fire until the water starts bubbling' executes the task 'boiling'.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/DUL.owl"/>
+    <rdfs:isDefinedBy rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl"/>
+    <rdfs:label xml:lang="en">executes task</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#causesTransition">
+    <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isCausedByEvent"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isEventIncludedIn"/>
+    <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+    <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Transition"/>
+    <rdfs:comment>A Transition between two Situations is always the result of some Event, and the causesTransition relation should be used to record the causal relation from the Event to the Transition.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA.owl"/>
+    <rdfs:label>causes transition</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nf1914d82f522428792b88d9f99b60a99">
+    <rdf:first rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#causesTransition"/>
+    <rdf:rest rdf:nodeID="N54cb5bd950fd4c23abb6599a0d6b22d4"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N4b84d87485484d5685ac8f6844536837">
+    <rdf:rest rdf:nodeID="N6e7d348acad14de1885d35991737eb61"/>
+    <rdf:first rdf:nodeID="N7ed71155cc99464d9e5f34b5d9e0e593"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N3c19c65da0b14c2e82678e1e3c1de3a6">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+    <owl:someValuesFrom rdf:nodeID="N6f8643ce6f27439e8666cefb47a9a92a"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N3b88b16fcc9b41a9be5aa3d696af7914">
+    <owl:onProperty rdf:resource="http://www.iri.upc.edu/groups/perception/OCRA/ont/ocra.owl#isWorsePlanThan"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Plan"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N65886d678eb3445fadaf80c5b3c6c6b8">
+    <owl:onProperty rdf:resource="http://www.iri.upc.edu/groups/perception/OCRA/ont/ocra.owl#hasGoal"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Goal"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isContainedIn">
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#overlaps"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N210960edbeb04fadaec136c7848d321b">
+    <rdf:first rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+    <rdf:rest rdf:nodeID="Nf4bb798571324a47a1c8b8be09b85617"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Na1fb70e8f45645fe92c4b67200ad6291">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+    <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Limb"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N25526c10951d438c99d3a44c9b0f61c8">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasComponent"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Goal"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isExpressedBy">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#associatedWith"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isReferenceOf"/>
+    <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SocialObject"/>
+    <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject"/>
+    <rdfs:comment>A relation between a dul:SocialObject (the 'meaning') and a dul:InformationObject (the 'expression'). 
+For example: 'A Beehive is a structure in which bees are kept, typically in the form of a dome or box.' (Oxford dictionary)'; 'the term Beehive expresses the concept Beehive in my apiculture ontology'.
+The intuition for 'meaning' is intended to be very broad. A separate, large comment is included in the encoding of 'expresses', for those who want to investigate more on what kind of meaning can be represented in what form.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/DUL.owl"/>
+    <rdfs:isDefinedBy rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl"/>
+    <rdfs:label xml:lang="en">is expressed by</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N0362d6b2886e463880f7e5831154591c">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <owl:intersectionOf rdf:nodeID="N41c01c7c370a4f538457851e98e80d7d"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#precedes">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#associatedWith"/>
+    <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+    <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+    <rdfs:comment>A relation between entities, expressing a 'sequence' schema. 
+E.g. 'year 1999 precedes 2000', 'deciding what coffee to use' precedes 'preparing coffee', 'World War II follows World War I', 'in the Milan to Rome autoroute, Bologna precedes Florence', etc.
+It can then be used between tasks, processes, time intervals, spatially locate objects, situations, etc. 
+Subproperties can be defined in order to distinguish the different uses.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/DUL.owl"/>
+    <rdfs:isDefinedBy rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl"/>
+    <rdfs:label xml:lang="en">precedes</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nf612653da8f74ba5ab1e975320ad4c2c">
+    <owl:onProperty rdf:resource="http://www.iri.upc.edu/groups/perception/OCRA/ont/ocra.owl#executesPlan"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:nodeID="N0d6024e0f2f343538e34c4d785b4e46e"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N2f05685c28c342779c14429c87b3bd13">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <owl:intersectionOf rdf:nodeID="N54ab77cdd0f64c4a9ca004e43b913cb8"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N2cc4059f8ac34c3faddf4b9bb238e872">
+    <rdf:first rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Plan"/>
+    <rdf:rest rdf:nodeID="Nf50ca673b5f5471fbb66ef38f02512fa"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N33ab23254cd34dc29c60c1df283a66e3">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Object"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N9496e37716ab4899ba9ec9e178c7ceb0">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N6980c2352190414db0d1fe7726c121fe">
+    <rdf:rest rdf:nodeID="Nd5edeefa907f4ffe8a1df2e797de363d"/>
+    <rdf:first rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Clean"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ne972fcca8f83450288509a7d54292157">
+    <rdf:first rdf:nodeID="N8deacb4da68e4435a2af8c4a31e2bf4c"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N1593c5b4ad824fc8a08f9928bd6e5462">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasComponent"/>
+    <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Goal"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N3baa0ba2b92b46d0acc450dbc752502f">
+    <rdf:rest rdf:nodeID="N2304ddb0e8e6466aba2ee8e8f668c730"/>
+    <rdf:first rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nbc5d7786f0bc4990b9ec1f14a4ddbe78">
+    <owl:intersectionOf rdf:nodeID="N465e1bf1f3f346b09554dde9e9dc2205"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ncee6b762bff742deb7743dfeec7b0f47">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskOf"/>
+    <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Message"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskDefinedIn">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isEventTypeDefinedIn"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDefinedIn"/>
+    <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
+    <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description"/>
+    <rdfs:comment>A relation between a description and a task, e.g. the task 'boil' is defined in a recipe for a cake.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/DUL.owl"/>
+    <rdfs:isDefinedBy rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl"/>
+    <rdfs:label xml:lang="en">is task defined in</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nf082e790dd8345fd9b05ad9bc2354d27">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Organism"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nabfb64ae0e284a2f83e5b7171e846db5">
+    <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isPlanFor"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N853711922b194d06a135c3827f959edb">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasComponent"/>
+    <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Goal"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N7dad0a0245b14440b5caf58202547cc5">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Na68f6418fa7848629d089f3256f50864">
+    <rdf:first rdf:nodeID="N972aa7f61f694d02836b4e70f7e65cbb"/>
+    <rdf:rest rdf:nodeID="Na576ab6664b34ff6ab55e604d6e8ecf5"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Na0f721ef231a4b788fdee5c4cba95ca1">
+    <rdf:rest rdf:nodeID="N1ab492d2d1514b688ef0e186c7fb0852"/>
+    <rdf:first rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N0d6024e0f2f343538e34c4d785b4e46e">
+    <owl:intersectionOf rdf:nodeID="Naf305148b4304de2ab75e6d214f7f396"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ne58898549b614fe0b3b3b52dfd795d8a">
+    <rdf:rest rdf:nodeID="N1c9da347025b4907a70c83fbddf52f0f"/>
+    <rdf:first rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Plan"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasTimeInterval">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegion"/>
+    <owl:inverseOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTimeIntervalOf"/>
+    <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+    <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#TimeInterval"/>
+    <rdfs:comment xml:lang="en">The generic relation between events and time intervals.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/DUL.owl"/>
+    <rdfs:isDefinedBy rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl"/>
+    <rdfs:label xml:lang="en">has time interval</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N968d7579844e4ea8a821f085018ce221">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDefinedIn"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasLocation">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#associatedWith"/>
+    <owl:inverseOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isLocationOf"/>
+    <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+    <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+    <rdfs:comment>A generic, relative spatial location, holding between any entities. E.g. 'the cat is on the mat', 'Omar is in Samarcanda', 'the wound is close to the femural artery'.
+For 'absolute' locations, see SpaceRegion</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/DUL.owl"/>
+    <rdfs:isDefinedBy rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl"/>
+    <rdfs:label xml:lang="en">has location</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N8fcd3a6d51d64ffb8db228185a75efa5">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#executesTask"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N468ba3110d6f4c78b988ef3e6ac0a947">
+    <owl:onProperty rdf:resource="http://www.iri.upc.edu/groups/perception/OCRA/ont/ocra.owl#hasGoal"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Goal"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N562e6636029d4013ba8de7425ab8e978">
+    <rdf:rest rdf:nodeID="N2da61c5555b146a695818490361cee16"/>
+    <rdf:first rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasFeature">
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N0fc46a212bda49c9b5b39a6a9e270a71">
+    <rdf:rest rdf:nodeID="N1d3e961cea1746fcae088907d0a6bf3a"/>
+    <rdf:first rdf:nodeID="N4ce4f318137b43cebb15cdfb34db0a8d"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N5a09dee41cfb4182b9158a603daa65c3">
+    <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAgent"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isPartOf"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Concept"/>
+    <rdfs:subClassOf rdf:nodeID="Nbdadae6eaa9c46df915340b4cdbb46d2"/>
+    <rdfs:subClassOf rdf:nodeID="Na4c5d32eb3a243a29d0007e3e8440561"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N57c80eb276f84985a23a08b6785d16de">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#overlaps"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Region"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N8f6a707605744c8d8fe3793125d61f88">
+    <rdf:rest rdf:nodeID="Nfdffeb8baaf84711aa0feac9aec5232a"/>
+    <rdf:first rdf:nodeID="Na37f2eb27759491e97d1992cd7278341"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ne6be1ccc06064f3d83885301d9e073b2">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:nodeID="N13ce8745c96544b5908e0c376b697a0c"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N3914812356904496afbc2201d2411f84">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Shape"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N7ad71fe019634db294b257d72b1e555b">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+    <owl:someValuesFrom rdf:nodeID="Nb0c1dd3b361f432fa408688fe39df1af"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N197646496b2f45eca72ff4bfe94661b9">
+    <rdf:rest rdf:nodeID="Nc27b9aa0448344a99fd41e6f024a239e"/>
+    <rdf:first rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Object"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N44bc61c0cd084c62b1527aa18abe3d5a">
+    <rdf:first rdf:nodeID="N13753aef230b47cdb0de9c5eda1df45e"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#involvesAgent">
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N12b8f39a9be1407580d2140eaadd7f57">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasComponent"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Goal"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N8deacb4da68e4435a2af8c4a31e2bf4c">
+    <owl:onProperty rdf:resource="http://www.iri.upc.edu/groups/perception/OCRA/ont/ocra.owl#executesPlan"/>
+    <owl:allValuesFrom rdf:nodeID="N544c620d9e104f3c812b09604f17a370"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N4ce4f318137b43cebb15cdfb34db0a8d">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+    <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAgent"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N27a04563242047c188ecdc1e64b391bc">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+    <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DeclarativeClause"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N7ed71155cc99464d9e5f34b5d9e0e593">
+    <owl:onProperty rdf:resource="http://www.iri.upc.edu/groups/perception/OCRA/ont/ocra.owl#hasGoal"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Goal"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N0d729d166b554b448279c8818da9ec63">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAgent"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N670845c9d47243e5b5247b36f63a4a54">
+    <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isReactionTo"/>
+    <owl:allValuesFrom rdf:nodeID="Naabf38be703c4d9cae4a62fe3b333c79"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N3ef535fedb0b477692e5574dddf8ac7b">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N2a6cdadb855b41fe9a86ceff767301b7">
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Plan"/>
+    <owl:onProperty rdf:resource="http://www.iri.upc.edu/groups/perception/OCRA/ont/ocra.owl#isBetterPlanThan"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N54cb5bd950fd4c23abb6599a0d6b22d4">
+    <rdf:first rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasTerminalScene"/>
+    <rdf:rest rdf:nodeID="N91f9fca120c44705b4208fbb9bd9cea5"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N852b40fb0c3e49e893c83a285cffb473">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:nodeID="N74eda8a425364c6987fe4dbc01d4fa57"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Na74c7173373348e4b6af106cb4c56747">
+    <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasDisposition"/>
+    <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Deposition"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nbaa3b3e86c77412e865b6b9fe5ae3d2a">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <owl:intersectionOf rdf:nodeID="N88e974df61a2467489649f12747647f4"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N7659426bc0a5458cba0bba4a0f478ab6">
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    <rdf:first rdf:nodeID="N95567a76a93e4f769dd5eb91732952ef"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nee38e0501f264441b2e05019c534142a">
+    <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Containment"/>
+    <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasDisposition"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isArtifactInvolvedIn">
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParticipantIn"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N5346aa933c6242d5a016f50d92fc9821">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDefinedIn"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Client-Server_Specification"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+    <rdfs:subClassOf rdf:nodeID="N2e2b6f5020674c8eb7c64884c57b2a44"/>
+    <rdfs:subClassOf rdf:nodeID="N33ab23254cd34dc29c60c1df283a66e3"/>
+    <rdfs:subClassOf rdf:nodeID="N96532f2a037548ac8e51d82297c923ae"/>
+    <rdfs:subClassOf rdf:nodeID="Nf062140fd7564969a1d29c18035e7003"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N17d2af7c45904fc294c414afb3922d57">
+    <rdf:first rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
+    <rdf:rest rdf:nodeID="N0ff237296e5e495cae42f42ac2547dde"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Na37f2eb27759491e97d1992cd7278341">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isPreconditionOf"/>
+    <owl:someValuesFrom rdf:nodeID="N7e15ebdd8fe248f4aefb6dace4377880"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nc9671e6852f84d00ac3de07689e35e2a">
+    <owl:onProperty rdf:resource="http://www.iri.upc.edu/groups/perception/OCRA/ont/ocra.owl#executesPlan"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Plan"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N1e32c09a2ad4465fa448b631cbcb1e6b">
+    <rdf:rest rdf:nodeID="N3dfd1dd7071b4fcb8d8f0902885f42c8"/>
+    <rdf:first rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isPreconditionOf">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#directlyPrecedes"/>
+    <rdfs:domain rdf:nodeID="N3caeac2c0e4347ce8ab63da8d34561ca"/>
+    <rdfs:range rdf:nodeID="N3abfbfd39557445ca12cf7d1e2c2a9be"/>
+    <rdfs:comment>Direct precedence applied to situations. 
+E.g., 'claiming to find nuclear weapons in a foreign country is a precondition to declare war against it'.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/DUL.owl"/>
+    <rdfs:isDefinedBy rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl"/>
+    <rdfs:label xml:lang="en">is precondition of</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ne37a253bdb264b1facefd5bd07870871">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#precedes"/>
+    <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#OrderedElement"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.iri.upc.edu/groups/perception/OCRA/ont/ocra.owl#hasPlan">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#associatedWith"/>
+    <owl:inverseOf rdf:resource="http://www.iri.upc.edu/groups/perception/OCRA/ont/ocra.owl#isPlanOf"/>
+    <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
+    <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Plan"/>
+    <rdfs:comment xml:lang="en">The relation holding between any Agent, and its Plan to achieve one of its desired Goals.</rdfs:comment>
+    <rdfs:label xml:lang="en">has plan</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasAlterationResult">
+    <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isAlterationResultOf"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegion"/>
+    <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
+    <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Region"/>
+    <rdfs:comment>Relates an action that alters an object to the region that the alteration reached during the action.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl"/>
+    <rdfs:label>has alteration result</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isEffectorInvolvedIn">
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParticipantIn"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Na90b513c9bf149c098aa8dcea1fdbe40">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPart"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Collection"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDefinedIn">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isConceptUsedIn"/>
+    <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Concept"/>
+    <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description"/>
+    <rdfs:comment>A relation between a Description and a Concept, e.g. a Workflow for a governmental Organization defines the Role 'officer', or 'the Italian Traffic Law defines the role Vehicle'.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/DUL.owl"/>
+    <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-PROC.owl"/>
+    <rdfs:isDefinedBy rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl"/>
+    <rdfs:label xml:lang="en">is defined in</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#parametrizes">
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N24e37edf198a4450847f5a2d4068f8a0">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isClassifiedBy"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#CommandingTask"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nd2dadede699e462cbf0e69dab104a1df">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <owl:intersectionOf rdf:nodeID="Ndc9ee144b72b4e85921262cdb9e8a812"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nc7e28d30578c434db538d260668ab406">
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    <rdf:first rdf:nodeID="Nff44823ec0124a3eb63f874cf63dbf0f"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasComponent">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasProperPart"/>
+    <owl:inverseOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isComponentOf"/>
+    <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+    <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+    <rdfs:comment>The hasProperPart relation without transitivity, holding between an Object (the system) and another (the component), and assuming a Design that structures the Object.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/DUL.owl"/>
+    <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA.owl"/>
+    <rdfs:isDefinedBy rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl"/>
+    <rdfs:label xml:lang="it">ha componente</rdfs:label>
+    <rdfs:label xml:lang="en">has component</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Na522ca96bc86459a8a742380974d9a8d">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+    <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#PrehensileEffector"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N972aa7f61f694d02836b4e70f7e65cbb">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasComponent"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Goal"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N0ff237296e5e495cae42f42ac2547dde">
+    <rdf:rest rdf:nodeID="N367146a5de9741008a4098c5dcb5201b"/>
+    <rdf:first rdf:nodeID="N8fb511f2b7a8442184d67ac5fe289e0a"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N3685f26edc504661838ce85a586cfd0c">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#LinguisticObject"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nd5b1115fa4f547cda35149e019be35ae">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPart"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:someValuesFrom rdf:nodeID="Nf61ac9a19632414dae6306175034683e"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#associatedWith"/>
+    <owl:inverseOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isConstituentOf"/>
+    <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+    <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+    <rdfs:comment>'Constituency' depends on some layering of  the world described by the ontology. For example, scientific granularities (e.g. body-organ-tissue-cell) or ontological 'strata' (e.g. social-mental-biological-physical) are  typical layerings. 
+Intuitively, a constituent is a part belonging to a lower layer. Since layering is actually a partition of the world described by the ontology, constituents are not properly classified as parts, although this kinship can be intuitive for common sense.
+A desirable advantage of this distinction is that we are able to talk e.g. of physical constituents of non-physical objects (e.g. systems), while this is not possible in terms of parts.
+Example of are the persons constituting a social system, the molecules constituting a person, the atoms constituting a river, etc. 
+In all these examples, we notice a typical discontinuity between the constituted and the constituent object: e.g. a social system is conceptualized at a different layer from the persons that constitute it, a person is conceptualized at a different layer from the molecules that constitute them, and a river is conceptualized at a different layer from the atoms that constitute it.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/DUL.owl"/>
+    <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA.owl"/>
+    <rdfs:isDefinedBy rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl"/>
+    <rdfs:label xml:lang="en">has constituent</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ncf54802fdbb24d70bd8d85d36cbd4f3e">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Object"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nf9a97e0a6e76442f80129d55f2113ae3">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasComponent"/>
+    <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Relation"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Concept">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SocialObject"/>
+    <rdfs:subClassOf rdf:nodeID="N968d7579844e4ea8a821f085018ce221"/>
+    <rdfs:subClassOf rdf:nodeID="Nb8d748389dfc4f70bc172d6c35debfba"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N636406b1e0f54506992225e8da8bd000">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isPreconditionOf"/>
+    <owl:someValuesFrom rdf:nodeID="N0362d6b2886e463880f7e5831154591c"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N8b6e4d6152814a578395baf644304509">
+    <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Localization"/>
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasQuality"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N7a707bcf24b54210a72591377b6d8191">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
+    <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Goal"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N44a0ee2b8d4b446eb2030f036a1c06fc">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+    <owl:allValuesFrom rdf:nodeID="N371cef12d458468d9b547f10ec76cb7a"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N02b1241b1be94dcba72550e0190a5580">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Plan"/>
+    <owl:onProperty rdf:resource="http://www.iri.upc.edu/groups/perception/OCRA/ont/ocra.owl#isWorsePlanThan"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Object">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+    <rdfs:subClassOf rdf:nodeID="N8d7051faf6b04d4ca3eda139b3e1ee4d"/>
+    <rdfs:subClassOf rdf:nodeID="Nbc81694caa2a43c1a470adfbbe08de86"/>
+    <rdfs:subClassOf rdf:nodeID="Na337dac3e7c0403a9f3394750e3a971a"/>
+    <rdfs:subClassOf rdf:nodeID="N3b91923e6295495d9343a3035b0804bb"/>
+    <rdfs:subClassOf rdf:nodeID="Ncf54802fdbb24d70bd8d85d36cbd4f3e"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N02e4848caee14179a73c5ace20d20638">
+    <rdf:rest rdf:nodeID="N13729dd7dd8646699ede9f52a5808dec"/>
+    <rdf:first rdf:nodeID="N3c0e21024f434e159f0466cec1c601cc"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N0e25f4d5c7b14f3faf3321be64caba65">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPart"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Parameter"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#overlaps">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#associatedWith"/>
+    <owl:inverseOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#overlaps"/>
+    <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+    <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+    <rdfs:comment>A schematic relation between any entities, e.g. 'the chest region overlaps with the abdomen region', 'my spoken words overlap with hers', 'the time of my leave overlaps with the time of your arrival', 'fibromyalgia overlaps with other conditions'.
+Subproperties and restrictions can be used to specialize overlaps for objects, events, time intervals, etc.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/DUL.owl"/>
+    <rdfs:isDefinedBy rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl"/>
+    <rdfs:label xml:lang="en">overlaps</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+    <rdfs:subClassOf rdf:nodeID="N8fcd3a6d51d64ffb8db228185a75efa5"/>
+    <rdfs:subClassOf rdf:nodeID="N7dad0a0245b14440b5caf58202547cc5"/>
+    <rdfs:subClassOf rdf:nodeID="N4435227c7c704baab6c50d52b90c5fc0"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N6a5ef666402a491fbde6a27efa846591">
+    <rdf:rest rdf:nodeID="Ncbadb7f598a147fb85053709c6f89e68"/>
+    <rdf:first rdf:nodeID="N4ff43d9972ee4245bba938c9039ed823"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Necc9381e903f454980ebe1fbf9dda17f">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+    <owl:allValuesFrom rdf:nodeID="Nd5a3eb5290f54d26b29de933f6ca1109"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N7072f3112bb8462582750b6da42be46d">
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    <rdf:first rdf:nodeID="N274c8f67462a4698b32c9947401c3652"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N81c33c569f6048c6a5cd4d900bbd55eb">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasComponent"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Goal"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ndc9ee144b72b4e85921262cdb9e8a812">
+    <rdf:first rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+    <rdf:rest rdf:nodeID="N7659426bc0a5458cba0bba4a0f478ab6"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nc71e9bc376c24a33927e9fbc029caa83">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <owl:intersectionOf rdf:nodeID="N40c374f171614ef3a682ef900bd030df"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N2f00cc75c9c847e2949859e9284ae4c0">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPart"/>
+    <owl:someValuesFrom rdf:nodeID="Nd718cc6fc0b34f13b10210379043d54e"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nd55394424b2343bea95cfcc499e673fe">
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    <rdf:first rdf:nodeID="N83605aa35a564928baf7b4a9e1f6feb1"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N3dfd1dd7071b4fcb8d8f0902885f42c8">
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    <rdf:first rdf:nodeID="N91590d8dd0024ac78c4fd317194ae873"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N440540d707714d2aa345079f6c3003a3">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N401cc47835d949b987f42a0237f2c86b">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasComponent"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Goal"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nb8d748389dfc4f70bc172d6c35debfba">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPart"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Concept"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Naf305148b4304de2ab75e6d214f7f396">
+    <rdf:rest rdf:nodeID="N6a5ef666402a491fbde6a27efa846591"/>
+    <rdf:first rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Plan"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nb610c24aa4d74bc58c832b6febcc3342">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+    <owl:allValuesFrom rdf:nodeID="N870be3ff81884471a9752ce27e41c30d"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N91f9fca120c44705b4208fbb9bd9cea5">
+    <rdf:first rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N1d01804718b94136b63c0935e11dae92">
+    <rdf:first rdf:nodeID="N7ad71fe019634db294b257d72b1e555b"/>
+    <rdf:rest rdf:nodeID="Nb65a36c3ee7746d79876e0d1a7d70969"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N2e2b6f5020674c8eb7c64884c57b2a44">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParticipantIn">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#associatedWith"/>
+    <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Object"/>
+    <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+    <rdfs:comment>A relation between an object and a process, e.g. 'John took part in the discussion', 'a large mass of snow fell during the avalanche', or 'a cook, some sugar, flour, etc. are all present in the cooking of a cake'.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/DUL.owl"/>
+    <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA.owl"/>
+    <rdfs:isDefinedBy rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl"/>
+    <rdfs:label xml:lang="en">is participant in</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nd2efd4cbe8ce4ae1a5c97fc74f6211f9">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:someValuesFrom rdf:nodeID="Nd4eefc9f27f8409b93992095adcbc296"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N46da9276f9634574a318214778cade11">
+    <rdf:first rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Plan"/>
+    <rdf:rest rdf:nodeID="Na68f6418fa7848629d089f3256f50864"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isPlanFor">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes"/>
+    <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Plan"/>
+    <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
+    <rdfs:comment>A special relation between a Plan and a Task, to indicate that the Plan describes a way to achieve the Task.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-WF.owl"/>
+    <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA.owl"/>
+    <rdfs:label xml:lang="en">is plan for</rdfs:label>
+    <rdfs:seeAlso>Note that DUL already says Plans can define Tasks, but that relation is used differently: a Plan defines a Task because it contains it as a step.</rdfs:seeAlso>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Neaa6b875d4d24d4da56381f268f16d20">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Substance"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nff44823ec0124a3eb63f874cf63dbf0f">
+    <owl:onProperty rdf:resource="http://www.iri.upc.edu/groups/perception/OCRA/ont/ocra.owl#executesPlan"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:nodeID="N0adc87c6cb38458fa02065225157ca02"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N7afa57aa33c74343b52f2fd9814bad3f">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskOf"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Channel"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N4499a5100aae4392bf2fc4524ce7e023">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Na2a1b3c6432b4cbc83fe318b3ee4aca6">
+    <owl:onProperty rdf:resource="http://www.iri.upc.edu/groups/perception/OCRA/ont/ocra.owl#hasPlan"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Plan"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Region">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Abstract"/>
+    <rdfs:subClassOf rdf:nodeID="Nb0b737459c304e4d954b31b7cde57382"/>
+    <rdfs:subClassOf rdf:nodeID="N57c80eb276f84985a23a08b6785d16de"/>
+    <rdfs:subClassOf rdf:nodeID="Na631c56965d5417ca6f81869a000d1ab"/>
+    <rdfs:subClassOf rdf:nodeID="Na2078d6e121a447a90eb06b04cad92de"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N97255451bbbc413ea9de22bacf1bb713">
+    <rdf:rest rdf:nodeID="N435cec0b14e841b99019b5dcf9d1e7b8"/>
+    <rdf:first rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nf50ca673b5f5471fbb66ef38f02512fa">
+    <rdf:rest rdf:nodeID="N68ecc912d496429db78e50e8a12becbe"/>
+    <rdf:first rdf:nodeID="N1593c5b4ad824fc8a08f9928bd6e5462"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isTaskOfOutputRole">
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskOf"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nf062140fd7564969a1d29c18035e7003">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasTimeInterval"/>
+    <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#TimeInterval"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N0b34ef9d42c344e1ac13d723909fff8d">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParticipantIn"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:someValuesFrom rdf:nodeID="Ndcf7b0edda78452bb0e9076ab2ce5e56"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N8041ddf546a64109b07d8387f11b71ba">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <owl:intersectionOf rdf:nodeID="Nccbbdb43a6b74767ba36704b6445a207"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Na631c56965d5417ca6f81869a000d1ab">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#precedes"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Region"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Na5cf7cbb7ed549a4b9e5cad7e3a92387">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <owl:unionOf rdf:nodeID="N86a9c2c67de549a096bade48ce674721"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isCausedByEvent">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent"/>
+    <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Transition"/>
+    <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+    <rdfs:comment>A relation recording that a Transition is the result of some Event.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA.owl"/>
+    <rdfs:label>is caused by event</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N5a039defc9974000985330e932a9ae2d">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.iri.upc.edu/groups/perception/OCRA/ont/ocra.owl#Collaboration"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N3978b03956324e0ea607ccab2f1ab254">
+    <owl:onProperty rdf:resource="http://www.iri.upc.edu/groups/perception/OCRA/ont/ocra.owl#hasGoal"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Goal"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.iri.upc.edu/groups/perception/OCRA/ont/ocra.owl#executesPlan">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#associatedWith"/>
+    <owl:inverseOf rdf:resource="http://www.iri.upc.edu/groups/perception/OCRA/ont/ocra.owl#isPlanExecutedIn"/>
+    <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+    <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Plan"/>
+    <rdfs:comment xml:lang="en">The relation holding between an Event, and a Plan that is executed by the Event. 
+
+This relationship is used as a primitive which means ‘following the sequence of actions in the plan as much as possible’.</rdfs:comment>
+    <rdfs:label xml:lang="en">executes plan</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nf00641669a064181b8702df4a8980588">
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    <rdf:first rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SocialObject"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N306101c8b4ce411ab29b9c6311ce372a">
+    <owl:onProperty rdf:resource="http://www.iri.upc.edu/groups/perception/OCRA/ont/ocra.owl#executesPlan"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Plan"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N96532f2a037548ac8e51d82297c923ae">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPart"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N8d433f89420f4dbaa6a39a383c670d20">
+    <owl:unionOf rdf:nodeID="N6663f2d0612141fea476d2473e3b0ffc"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#EventType"/>
+    <rdfs:subClassOf rdf:nodeID="Nd062c2e040da474f931870f96a79e3cd"/>
+    <rdfs:subClassOf rdf:nodeID="Nc9c3df5b47924184b5fc9a76008cf6cb"/>
+    <rdfs:subClassOf rdf:nodeID="Ne8314af1f5124619b1537ccf5b4c3690"/>
+    <rdfs:subClassOf rdf:nodeID="N442a26006ee740e3b7ccbdacfe476e5e"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nf53ab3389c844cd787ae872fe98cf7b7">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+    <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Na31d6decf286434282071e88022f494b">
+    <rdf:first rdf:nodeID="N65886d678eb3445fadaf80c5b3c6c6b8"/>
+    <rdf:rest rdf:nodeID="N44bc61c0cd084c62b1527aa18abe3d5a"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nb6b4e4ecdb55477fa3b06352a131489b">
+    <rdf:first rdf:nodeID="N1d8105e589e14832bd8b52846d608955"/>
+    <rdf:rest rdf:nodeID="N3fdae3ba85384beb81ff6ab786c3adc0"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isStepOf">
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskDefinedIn"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N497f427b6d5c4574b0d53eb2543c2e73">
+    <owl:onProperty rdf:resource="http://www.iri.upc.edu/groups/perception/OCRA/ont/ocra.owl#hasPlan"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:nodeID="Ne22a72908b934c67a17cbda91da24b5d"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N0eed9e0c449544b692113380393c975e">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#precedes"/>
+    <owl:someValuesFrom rdf:nodeID="Nc71e9bc376c24a33927e9fbc029caa83"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#causes">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#affects"/>
+    <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isReactionTo"/>
+    <SOMA:UsageGuideline xml:lang="en">Simple relationship between two actions to express that the object (the reaction) would not have occured if it were not for the subject (the cause), e.g., a Communication Action classified as an Querying Task causes another Communication Task classified as an Answering Task and the latter would not have occured without the former. An example without Agents involved is some domino stone that would not have toppled without the first one toppling.
+
+When Agents are involved, the relation might be seen as an abstraction of the execution of some plan that arises from changing the agents goal that is due to perceiving the cause. However, currently it is unclear how to model such a pattern and therefore not included in SOMA.
+
+This relation is seen as transitive.</SOMA:UsageGuideline>
+    <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-ACT.owl"/>
+    <rdfs:label xml:lang="en">causes</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isExecutedIn">
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isOccurringIn"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
+    <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
+    <rdfs:comment>A relation between an action and a task, e.g. 'putting some water in a pot and putting the pot on a fire until the water starts bubbling' executes the task 'boiling'.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/DUL.owl"/>
+    <rdfs:isDefinedBy rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl"/>
+    <rdfs:label xml:lang="en">is executed in</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N5a39cddf056a48c18e63e79bb8da1252">
+    <rdf:first rdf:nodeID="N3c19c65da0b14c2e82678e1e3c1de3a6"/>
+    <rdf:rest rdf:nodeID="N361381a70df94c0fa92d037eb9be6120"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.iri.upc.edu/groups/perception/OCRA/ont/ocra.owl#Collaboration">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+    <rdfs:subClassOf rdf:nodeID="N11d4d824b4ad4ee28ef489ada571f801"/>
+    <rdfs:subClassOf rdf:nodeID="N0accc007da0f4e8aab8a68081d4d8f74"/>
+    <rdfs:subClassOf rdf:nodeID="N306101c8b4ce411ab29b9c6311ce372a"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N269e6842f46f4ea899f57edc529861ad">
+    <owl:onProperty rdf:resource="http://www.iri.upc.edu/groups/perception/OCRA/ont/ocra.owl#hasPlan"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Plan"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N8e16e005944f4d29bc934ab75a6fdf27">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+    <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ne32f79c0435143ad9e9ba205df6c4e9a">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+    <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">2</owl:minQualifiedCardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onClass rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N40149f12e3c54cddbe303f8fd1d90d75">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskOf"/>
+    <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Receiver"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N246cb73574dc4b54993bf4319d9d9d91">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Quality"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N2cfece8495c74849a6578f7031f0519f">
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    <rdf:first rdf:nodeID="N93647cb20cfc41599510d2b3b8545047"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#associatedWith"/>
+    <owl:inverseOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isClassifiedBy"/>
+    <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Concept"/>
+    <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+    <rdfs:comment>A relation between a Concept and an Entity, e.g. the Role 'student' classifies a Person 'John'.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/DUL.owl"/>
+    <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-PROC.owl"/>
+    <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-STATE.owl"/>
+    <rdfs:isDefinedBy rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl"/>
+    <rdfs:label xml:lang="en">classifies</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nd140b21e788247c2a9e3e84020a08421">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:nodeID="Ne32f79c0435143ad9e9ba205df6c4e9a"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N9aae2a5a55fc4d66a7c2d7002014d205">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Plan"/>
+    <owl:onProperty rdf:resource="http://www.iri.upc.edu/groups/perception/OCRA/ont/ocra.owl#isBetterPlanThan"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N88dfa3913d25406980173411fdc0c409">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+    <owl:allValuesFrom rdf:nodeID="N0b89c70671b34a04898036c3c9716d84"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N73827276e9ba4701b4cf2ceb60fe6867">
+    <owl:onProperty rdf:resource="http://www.iri.upc.edu/groups/perception/OCRA/ont/ocra.owl#isWorsePlanThan"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Plan"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N404c0d7bf7d34816880f8ab48cae796b">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <owl:intersectionOf rdf:nodeID="Nfac28d212c8740eea6d74fff6b28b4fb"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#PhysicalTask">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
+    <rdfs:subClassOf rdf:nodeID="N88dfa3913d25406980173411fdc0c409"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nd5a202a38bdb46b59bab346a2a06a369">
+    <rdf:first rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+    <rdf:rest rdf:nodeID="N5a39cddf056a48c18e63e79bb8da1252"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N331c12cfc2344729acec8f593cfb7e09">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:nodeID="Na5cf7cbb7ed549a4b9e5cad7e3a92387"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ned47b3b8fd9a46ebbf7267912d5ee2f2">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDefinedIn"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Client-Server_Specification"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Na56ff15a217d47d089273fafd9c28919">
+    <rdf:first rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+    <rdf:rest rdf:nodeID="N266075ab3b564bb2904448dcb9c833b2"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N4d33d611e05d47dc8bbcff05514b4c23">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Place"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPrecondition">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#directlyFollows"/>
+    <owl:inverseOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isPreconditionOf"/>
+    <rdfs:domain rdf:nodeID="Nb869b3f199f04a9e8c86f5c31a4771ca"/>
+    <rdfs:range rdf:nodeID="N731c9ccf331b454598c439a39d001c09"/>
+    <rdfs:comment>Direct precedence applied to situations. 
+E.g., 'A precondition to declare war against a foreign country is claiming to find nuclear weapons in it'.</rdfs:comment>
+    <rdfs:comment>This should be taken to mean: a precondition is a situation without which the current situation would not be possible.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/DUL.owl"/>
+    <rdfs:isDefinedBy rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl"/>
+    <rdfs:label xml:lang="en">has precondition</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ne8314af1f5124619b1537ccf5b4c3690">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskOf"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nb71b474090654e24b4ca4a6854ab2fa1">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPart"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ProcessType"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasBinding">
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPart"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nebb8d85a50d242be846bbb7a45bf3f9f">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Plan"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nb0b737459c304e4d954b31b7cde57382">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Region"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Plan">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description"/>
+    <rdfs:subClassOf rdf:nodeID="Nabfb64ae0e284a2f83e5b7171e846db5"/>
+    <rdfs:subClassOf rdf:nodeID="N12b8f39a9be1407580d2140eaadd7f57"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N4ca14060bcf241f7877d01b4e8ef1dae">
+    <rdf:rest rdf:nodeID="Na281af7b978d446f8f999c6708be34ca"/>
+    <rdf:first rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N05c1c8330ecf43fa9002d8be26f660e3">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+    <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#State"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nb68ebf90ec464683a165a161bcbb9b1e">
+    <owl:someValuesFrom rdf:nodeID="Nf61bf856930e450bab300c78031a76d9"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isPostconditionOf"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N9d903d400ea8458f87bc087e250c0b3b">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPart"/>
+    <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Feature"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N9d937430151e4cdc9f05b6df193892e9">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <owl:intersectionOf rdf:nodeID="Nc6cadb025a7542789787f58a54764813"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Naabf38be703c4d9cae4a62fe3b333c79">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isClassifiedBy"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#QueryingTask"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nbec2fd863ef342ae9535015e3c1b0b1b">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskOf"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Sender"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N02ec5b86d81747e4ac557c826e2a0dd6">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDefinedIn"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#PluginSpecification"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ne87da59ee28f4018989a81aa65f0c8fd">
+    <owl:intersectionOf rdf:nodeID="N562e6636029d4013ba8de7425ab8e978"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N6f8643ce6f27439e8666cefb47a9a92a">
+    <owl:intersectionOf rdf:nodeID="N08c8ea84313e46a3a31f84cf62369c7b"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskOf">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isRelatedToConcept"/>
+    <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
+    <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+    <rdfs:comment>A relation between roles and tasks, e.g. 'students have the duty of giving exams' (i.e. the Role 'student' hasTask the Task 'giving exams').</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/DUL.owl"/>
+    <rdfs:isDefinedBy rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl"/>
+    <rdfs:label xml:lang="en">is task of</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nfa28c5b75d184dd784d052a4920db2ca">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Localization"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N00d8b328a89e4f8a9cb61e411073e2d3">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Software"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N8d7051faf6b04d4ca3eda139b3e1ee4d">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPart"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Object"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Na281af7b978d446f8f999c6708be34ca">
+    <rdf:first rdf:nodeID="N4e64e8b780874e9bbb5cec6eb4b668d8"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Abstract">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N4ff43d9972ee4245bba938c9039ed823">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasComponent"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Goal"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasAction">
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Object"/>
+    <rdfs:subClassOf rdf:nodeID="N5fca41b175744ad9be825c07f8d7cf5b"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N4e64e8b780874e9bbb5cec6eb4b668d8">
+    <owl:unionOf rdf:nodeID="N31f1fc2f291c4fd3b00c7d0f2fb82c3b"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N2da61c5555b146a695818490361cee16">
+    <rdf:first rdf:nodeID="N3978b03956324e0ea607ccab2f1ab254"/>
+    <rdf:rest rdf:nodeID="N4f02ce0de0f3471dbe1bb5804baaa260"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N91590d8dd0024ac78c4fd317194ae873">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <owl:unionOf rdf:nodeID="N0fc46a212bda49c9b5b39a6a9e270a71"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N1d8105e589e14832bd8b52846d608955">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+    <owl:someValuesFrom rdf:nodeID="N5dd3421229a5484f94e03827ec482044"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nfe99598e96ae483c8c8d8ff6dac2f755">
+    <rdf:first rdf:nodeID="N3fd602189ead4881b023d3af1395648c"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nb156a7478f404de893797631fe6ad4c7">
+    <rdf:rest rdf:nodeID="N7427b0c3f7c74957acbedcf59ac94b35"/>
+    <rdf:first rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Plan"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N54ab77cdd0f64c4a9ca004e43b913cb8">
+    <rdf:rest rdf:nodeID="Nb6b4e4ecdb55477fa3b06352a131489b"/>
+    <rdf:first rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N536cce49f8a441bb84254d28f28c126a">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <owl:intersectionOf rdf:nodeID="N4ca14060bcf241f7877d01b4e8ef1dae"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N47ca96fe01bf4efb83e607c30afb7227">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isTaskOfInputRole">
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskOf"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N76b453b9501945a0a61dc10904eac657">
+    <owl:onProperty rdf:resource="http://www.iri.upc.edu/groups/perception/OCRA/ont/ocra.owl#executesPlan"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:nodeID="N404c0d7bf7d34816880f8ab48cae796b"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isOntopOf">
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasLocation"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nc55a8bbf28404f59990b9e61df363b28">
+    <owl:intersectionOf rdf:nodeID="N6980c2352190414db0d1fe7726c121fe"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N9966f48c3aa541f680e7ea2eb6cf2cd9">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Region"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nc9466027b71647bfa87eca15c6a71329">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+    <owl:allValuesFrom rdf:nodeID="N536cce49f8a441bb84254d28f28c126a"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nbc522e3e382d426b9613d7f48c8cd9e8">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#precedes"/>
+    <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nc9e8f33ae7714ba89865c8f0892fce9a">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SpaceRegion"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N6e7d348acad14de1885d35991737eb61">
+    <rdf:first rdf:nodeID="Na75f8433ff814b0fb1f99d21720d0863"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nbac8f6de4ef941489dcd988b8a5dc60c">
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Plan"/>
+    <owl:onProperty rdf:resource="http://www.iri.upc.edu/groups/perception/OCRA/ont/ocra.owl#isWorsePlanThan"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N93647cb20cfc41599510d2b3b8545047">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasComponent"/>
+    <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Goal"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Object"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N3fd602189ead4881b023d3af1395648c">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nd37c08347f7d4776b900f7ff3eaa22e3">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPart"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:someValuesFrom rdf:nodeID="N2f05685c28c342779c14429c87b3bd13"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Na64568c4bb684ee3916405313508d0a1">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPart"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SocialObject"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N371cef12d458468d9b547f10ec76cb7a">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasQuality"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Shape"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N422d7cf2b0bb4f2e9285f12c947b4b93">
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    <rdf:first rdf:nodeID="N2a6cdadb855b41fe9a86ceff767301b7"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N544c620d9e104f3c812b09604f17a370">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <owl:intersectionOf rdf:nodeID="N40634097c7fe4a258225db4aebf8bf34"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isAlterationResultOf">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isRegionFor"/>
+    <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Region"/>
+    <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
+    <rdfs:comment>Relates an action that alters an object to the region that the alteration reached during the action.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl"/>
+    <rdfs:label>is alteration result of</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N3e9123bcaa03461e937bd616a58e15a2">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N0479a643bb304320bbd8f746fcfc5613">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N0accc007da0f4e8aab8a68081d4d8f74">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+    <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">2</owl:minQualifiedCardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onClass rdf:nodeID="N1f43cb5dcdd94f64bdcc47583a9702d2"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ne6e9b01843a5410c9c783d252f9e049e">
+    <rdf:rest rdf:nodeID="N02e4848caee14179a73c5ace20d20638"/>
+    <rdf:first rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Plan"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N3a182c67eafe42d39f47d19dc6aff8c7">
+    <rdf:rest rdf:nodeID="N0ed1809d8b0a4381b4ff931dc4950a04"/>
+    <rdf:first rdf:nodeID="N25526c10951d438c99d3a44c9b0f61c8"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nf55c46bf3ffe4205abf19cf3fb7ac46e">
+    <rdf:first rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SocialObject"/>
+    <rdf:rest rdf:nodeID="Na3760ec4f1cf4024bf16967d45792fe6"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N4bd1cf03941f4fa29992f62bcb376f78">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDefinedIn"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nf66065ccdade425abf7ea112d4e183fb">
+    <owl:onProperty rdf:resource="http://www.iri.upc.edu/groups/perception/OCRA/ont/ocra.owl#hasPlan"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:nodeID="Nbaa3b3e86c77412e865b6b9fe5ae3d2a"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N3258a62c70e24c72946edbe794e8fd26">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasComponent"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Goal"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N3bafbb907e3e4e9d9ceb15121d86df84">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+    <owl:allValuesFrom rdf:nodeID="Na74c7173373348e4b6af106cb4c56747"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isConceptExpressedBy">
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isExpressedBy"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ned3fc7abf4924de8b7f1b0084aa03e5b">
+    <rdf:rest rdf:nodeID="N86de703fc07e4a38aaee0d2d06f6790a"/>
+    <rdf:first rdf:nodeID="N273e7526e8434f3aa733f487c4938276"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SocialObject">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Object"/>
+    <rdfs:subClassOf rdf:nodeID="Na64568c4bb684ee3916405313508d0a1"/>
+    <rdfs:subClassOf rdf:nodeID="N03a18d495e49434694c3362f8cdc2b7a"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N2634aa56c11b404baa6b9cf992729b84">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPrecondition"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#NonmanifestedSituation"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N274c8f67462a4698b32c9947401c3652">
+    <owl:onProperty rdf:resource="http://www.iri.upc.edu/groups/perception/OCRA/ont/ocra.owl#executesPlan"/>
+    <owl:allValuesFrom rdf:nodeID="N9d937430151e4cdc9f05b6df193892e9"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nd5a3eb5290f54d26b29de933f6ca1109">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+    <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#InterrogativeClause"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nfdffeb8baaf84711aa0feac9aec5232a">
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    <rdf:first rdf:nodeID="N76b453b9501945a0a61dc10904eac657"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#follows">
+    <owl:inverseOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#precedes"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N69cfbe82139f43699a9eced90d117c7a">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Process"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N6f6cc74d44874734a48002a210cf03f7">
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Plan"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://www.iri.upc.edu/groups/perception/OCRA/ont/ocra.owl#isBetterPlanThan"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Naf6efefbc1104f73ab03d7dc0447f7cd">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskOf"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Answer"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N15499d68bf55485281f784c7c1ce64b3">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:nodeID="N8d433f89420f4dbaa6a39a383c670d20"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N603ba0a1a7a14f168bf15e671c3e7d98">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
+    <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#TimeInterval"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N9bc10cc9ea384eb391e2a50e06a2bbbf">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:nodeID="N2bc2f392d9a34cb6957b7ea69a8a4fcc"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Transporting">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ModifyingPhysicalObject"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N3a813c96f59d4f88a15b28786dedf336">
+    <rdf:first rdf:nodeID="Nf66065ccdade425abf7ea112d4e183fb"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nd10c9731a16e4f0d98edf83a66021d00">
+    <owl:inverseOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPart"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N41c01c7c370a4f538457851e98e80d7d">
+    <rdf:rest rdf:nodeID="N6ee01ecd6a0749769ab51b9757e904bf"/>
+    <rdf:first rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N86de703fc07e4a38aaee0d2d06f6790a">
+    <rdf:first rdf:nodeID="N636406b1e0f54506992225e8da8bd000"/>
+    <rdf:rest rdf:nodeID="N0e67862e7b95461bbcf917f81833042f"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N1d3e961cea1746fcae088907d0a6bf3a">
+    <rdf:first rdf:nodeID="Nec21bfc5c5b34c04a8e2666ba3f3eeea"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#EventType">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Concept"/>
+    <rdfs:subClassOf rdf:nodeID="N440540d707714d2aa345079f6c3003a3"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nb190d4dbf6944c7e956279f20112e97c">
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    <rdf:first rdf:nodeID="N497f427b6d5c4574b0d53eb2543c2e73"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N6b83b62cd0d24e1099e085fa6161a00c">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
+    <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nb481d4014ca3492cb62c9e6ff7b7051c">
+    <rdf:first rdf:nodeID="N3b88b16fcc9b41a9be5aa3d696af7914"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N0bf78bb1f3dd48ec9cf5a8a2682b7037">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskOf"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Query"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N83605aa35a564928baf7b4a9e1f6feb1">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Plan"/>
+    <owl:onProperty rdf:resource="http://www.iri.upc.edu/groups/perception/OCRA/ont/ocra.owl#isBetterPlanThan"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isLinkedTo">
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasLocation"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nbd76fb676d1f4cbeb3e1b581b4d1085e">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPart"/>
+    <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#SourcePathGoalTheory"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isClassifiedBy">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#associatedWith"/>
+    <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+    <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Concept"/>
+    <rdfs:comment>A relation between a Concept and an Entity, e.g. 'John is considered a typical rude man'; your last concert constitutes the achievement of a lifetime; '20-year-old means she's mature enough'.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/DUL.owl"/>
+    <rdfs:isDefinedBy rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl"/>
+    <rdfs:label xml:lang="en">is classified by</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N71c9a69f45c04714b782d4e1692ab0f1">
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    <rdf:first rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Na987426b73da44eeb21d0e0a2abb2d8e">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDefinedIn"/>
+    <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#PluginSpecification"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N731c9ccf331b454598c439a39d001c09">
+    <owl:unionOf rdf:nodeID="Na3773a0521cf4d24a2e0069079f273ef"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N95567a76a93e4f769dd5eb91732952ef">
+    <owl:onProperty rdf:resource="http://www.iri.upc.edu/groups/perception/OCRA/ont/ocra.owl#executesPlan"/>
+    <owl:allValuesFrom rdf:nodeID="Nf72926bf2d534b0fae51f6bdacf67da2"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasPhysicalComponent">
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasComponent"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ne22a72908b934c67a17cbda91da24b5d">
+    <owl:intersectionOf rdf:nodeID="Nb156a7478f404de893797631fe6ad4c7"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nc520d6523c3a4a539a8f1c8ca99f2923">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <owl:intersectionOf rdf:nodeID="Ne6e9b01843a5410c9c783d252f9e049e"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N7e99a39741244e099dbdad270bf6b4a6">
+    <owl:intersectionOf rdf:nodeID="Nb96d4d46125b4d8f93d0b335572d3cf9"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N71a1d0cd994045418a0bf6365fd9c102">
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    <rdf:first rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SocialObject"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N89d73b578cd74c22aa6cf56e8e0682e8">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:nodeID="Nc55a8bbf28404f59990b9e61df363b28"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Na337dac3e7c0403a9f3394750e3a971a">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isClassifiedBy"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Na1872599a2204924bcc0bffc02881336">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPart"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#StateType"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isOccurrenceOf">
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isClassifiedBy"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N11d4d824b4ad4ee28ef489ada571f801">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPart"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.iri.upc.edu/groups/perception/OCRA/ont/ocra.owl#Collaboration"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nf4bb798571324a47a1c8b8be09b85617">
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    <rdf:first rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalPlace">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N15b197e259674dbaa75dfeb345b964dd">
+    <rdf:first rdf:nodeID="N5a09dee41cfb4182b9158a603daa65c3"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N9e0a537f0e394a21a77fa4a51fdfb066">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nc9c3df5b47924184b5fc9a76008cf6cb">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskDefinedIn"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N31f1fc2f291c4fd3b00c7d0f2fb82c3b">
+    <rdf:first rdf:nodeID="Nac5541da0dcd4db58cc52baf8cfb5a61"/>
+    <rdf:rest rdf:nodeID="Nfe99598e96ae483c8c8d8ff6dac2f755"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N189a641e190b420eb1d18e3b0b4869af">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <owl:intersectionOf rdf:nodeID="Ne58898549b614fe0b3b3b52dfd795d8a"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N459b1591451b41c09d24da25ed3bade2">
+    <rdf:rest rdf:nodeID="N3a813c96f59d4f88a15b28786dedf336"/>
+    <rdf:first rdf:nodeID="N468ba3110d6f4c78b988ef3e6ac0a947"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N13729dd7dd8646699ede9f52a5808dec">
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    <rdf:first rdf:nodeID="N6f6cc74d44874734a48002a210cf03f7"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N1c9da347025b4907a70c83fbddf52f0f">
+    <rdf:rest rdf:nodeID="Nb481d4014ca3492cb62c9e6ff7b7051c"/>
+    <rdf:first rdf:nodeID="N853711922b194d06a135c3827f959edb"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N91390c934d734afa87e75888a98b12d6">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isPreconditionOf"/>
+    <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ne46c05c3afc348ef90b3c069b0b11f59">
+    <rdf:first rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParticipantIn"/>
+    <rdf:rest rdf:nodeID="N209734363c2c475cb9efeee8f2831e6f"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N40634097c7fe4a258225db4aebf8bf34">
+    <rdf:first rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Plan"/>
+    <rdf:rest rdf:nodeID="Na5c1319b8bd74b528e5baa89e625d9b0"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ned50eb64def84dac8babfcfa24c97589">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:nodeID="N8b6e4d6152814a578395baf644304509"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N2c9dd15e28cd4088b184ae6829ff49f3">
+    <owl:onProperty rdf:resource="http://www.iri.upc.edu/groups/perception/OCRA/ont/ocra.owl#executesPlan"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:nodeID="N189a641e190b420eb1d18e3b0b4869af"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N6ee01ecd6a0749769ab51b9757e904bf">
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    <rdf:first rdf:nodeID="N4ed79856ff11459891dca4250f2a42eb"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N3c0e21024f434e159f0466cec1c601cc">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasComponent"/>
+    <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Goal"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nd062c2e040da474f931870f96a79e3cd">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isExecutedIn"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N226c08e4cc0a4bf09c868039afb9667e">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskOf"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:someValuesFrom rdf:nodeID="Nebb8d85a50d242be846bbb7a45bf3f9f"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRole">
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isClassifiedBy"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#affects">
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#precedes"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nbcd83df37b544a98ac95fc30cf582de9">
+    <rdf:rest rdf:nodeID="N8606703f92cb4db6951baf829e51274d"/>
+    <rdf:first rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasInitialSituation"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nf61bf856930e450bab300c78031a76d9">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <owl:intersectionOf rdf:nodeID="N3baa0ba2b92b46d0acc450dbc752502f"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nd4eefc9f27f8409b93992095adcbc296">
+    <owl:intersectionOf rdf:nodeID="Nedc56df2fb584303a7029eae03b5886a"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N0de1c0496bf24e3698da3d8c738c762e">
+    <rdf:rest rdf:nodeID="N7072f3112bb8462582750b6da42be46d"/>
+    <rdf:first rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N02b7b18861a046c3bccf1fb831ce037d">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N0b89c70671b34a04898036c3c9716d84">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <owl:intersectionOf rdf:nodeID="N1e32c09a2ad4465fa448b631cbcb1e6b"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nc6cadb025a7542789787f58a54764813">
+    <rdf:first rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Plan"/>
+    <rdf:rest rdf:nodeID="Nd69082863c2944018d6456dd3ae262dd"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nac5541da0dcd4db58cc52baf8cfb5a61">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAgent"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N3b91923e6295495d9343a3035b0804bb">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParticipantIn"/>
+    <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N08c8ea84313e46a3a31f84cf62369c7b">
+    <rdf:rest rdf:nodeID="N4b84d87485484d5685ac8f6844536837"/>
+    <rdf:first rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nfac28d212c8740eea6d74fff6b28b4fb">
+    <rdf:rest rdf:nodeID="N3a182c67eafe42d39f47d19dc6aff8c7"/>
+    <rdf:first rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Plan"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#expresses">
+    <owl:inverseOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isExpressedBy"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N6239794b0cb941f8b92287f7e5ad5ac9">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+    <owl:allValuesFrom rdf:resource="http://www.iri.upc.edu/groups/perception/OCRA/ont/ocra.owl#Collaboration"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#TimeInterval">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Region"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N367146a5de9741008a4098c5dcb5201b">
+    <rdf:first rdf:nodeID="Na2a1b3c6432b4cbc83fe318b3ee4aca6"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nfc8f2e23012d4bae80c3265bd17c4818">
+    <rdf:rest rdf:nodeID="Nbba3c954deb94c969e712fc5454764e9"/>
+    <rdf:first rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N4ed79856ff11459891dca4250f2a42eb">
+    <owl:onProperty rdf:resource="http://www.iri.upc.edu/groups/perception/OCRA/ont/ocra.owl#executesPlan"/>
+    <owl:allValuesFrom rdf:nodeID="Nc520d6523c3a4a539a8f1c8ca99f2923"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nccbbdb43a6b74767ba36704b6445a207">
+    <rdf:first rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+    <rdf:rest rdf:nodeID="N1d01804718b94136b63c0935e11dae92"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N3adafcef84bd4225b9eed1edc87794a8">
+    <rdf:first rdf:nodeID="Nbc522e3e382d426b9613d7f48c8cd9e8"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N785bd580861247ebb9a09e10ee188cb6">
+    <owl:inverseOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesWhole"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N8fb511f2b7a8442184d67ac5fe289e0a">
+    <owl:onProperty rdf:resource="http://www.iri.upc.edu/groups/perception/OCRA/ont/ocra.owl#hasGoal"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Goal"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Na078204965664cd9af11290ed586dd1e">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+    <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#PhysicalAction"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasPredecessor">
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPart"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#definesTask">
+    <owl:inverseOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskDefinedIn"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N4435227c7c704baab6c50d52b90c5fc0">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#executesTask"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N0e67862e7b95461bbcf917f81833042f">
+    <rdf:first rdf:nodeID="Nf612653da8f74ba5ab1e975320ad4c2c"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nf72926bf2d534b0fae51f6bdacf67da2">
+    <owl:intersectionOf rdf:nodeID="N2cc4059f8ac34c3faddf4b9bb238e872"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N2f3fbbd399b1484dabcaa32e68e9bbe7">
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    <rdf:first rdf:nodeID="Nd2efd4cbe8ce4ae1a5c97fc74f6211f9"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nacd08952d0a14feaa74a5f270df941ea">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:someValuesFrom rdf:nodeID="Nd2dadede699e462cbf0e69dab104a1df"/>
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isPostconditionOf"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ncbadb7f598a147fb85053709c6f89e68">
+    <rdf:first rdf:nodeID="N02b1241b1be94dcba72550e0190a5580"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N86a9c2c67de549a096bade48ce674721">
+    <rdf:rest rdf:nodeID="Nf00641669a064181b8702df4a8980588"/>
+    <rdf:first rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isConstraintFor">
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N6663f2d0612141fea476d2473e3b0ffc">
+    <rdf:rest rdf:nodeID="N71a1d0cd994045418a0bf6365fd9c102"/>
+    <rdf:first rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isProcessDefinedIn">
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDefinedIn"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N7b8ffc9d1a5f4ccc907115273526bbab">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+    <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Temperature"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N0ed1809d8b0a4381b4ff931dc4950a04">
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    <rdf:first rdf:nodeID="N73827276e9ba4701b4cf2ceb60fe6867"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#directlyPrecedes">
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#precedes"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Goal">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isRoleOf">
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N74fa01b7027f497a97ea9d46d96c0169">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+    <owl:allValuesFrom rdf:nodeID="N27a04563242047c188ecdc1e64b391bc"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nbb47df6e4db24cf8bbd90a8743528c0f">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:someValuesFrom rdf:nodeID="Ne87da59ee28f4018989a81aa65f0c8fd"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#involvesArtifact">
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N1f43cb5dcdd94f64bdcc47583a9702d2">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <owl:intersectionOf rdf:nodeID="Nfc8f2e23012d4bae80c3265bd17c4818"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nc85bc9f86eb244e3acb59a38200f8e1a">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPart"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Quality"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N3abfbfd39557445ca12cf7d1e2c2a9be">
+    <owl:unionOf rdf:nodeID="N97255451bbbc413ea9de22bacf1bb713"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nbba3c954deb94c969e712fc5454764e9">
+    <rdf:rest rdf:nodeID="Nb190d4dbf6944c7e956279f20112e97c"/>
+    <rdf:first rdf:nodeID="N8e58b93081034cfc904ec6a90cc8a61a"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nb0c1dd3b361f432fa408688fe39df1af">
+    <owl:intersectionOf rdf:nodeID="N625b33c2c5d344c4903167328791d533"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N75f429b536724e9680919e5667b369f6">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <owl:unionOf rdf:nodeID="Na0f721ef231a4b788fdee5c4cba95ca1"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N7dd6c3e4933546ce82bc6998783fc86e">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+    <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#overlappedBy">
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#overlaps"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasPhase">
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N40c374f171614ef3a682ef900bd030df">
+    <rdf:first rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+    <rdf:rest rdf:nodeID="N3adafcef84bd4225b9eed1edc87794a8"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasProperPart">
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPart"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nbdadae6eaa9c46df915340b4cdbb46d2">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Object"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#overlappedOn">
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#overlaps"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isTaskDefinedInAffordance">
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskDefinedIn"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N273e7526e8434f3aa733f487c4938276">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isPreconditionOf"/>
+    <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N3caeac2c0e4347ce8ab63da8d34561ca">
+    <owl:unionOf rdf:nodeID="N210960edbeb04fadaec136c7848d321b"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParametrizedBy">
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isClassifiedBy"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N855535dcbe3d4f408537ad8edf371402">
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    <rdf:first rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesPart"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N1d4cf05337024e3b9d10ace65763a330">
+    <rdf:rest rdf:nodeID="Ned3fc7abf4924de8b7f1b0084aa03e5b"/>
+    <rdf:first rdf:nodeID="Nbb47df6e4db24cf8bbd90a8743528c0f"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nb65a36c3ee7746d79876e0d1a7d70969">
+    <rdf:rest rdf:nodeID="N8f6a707605744c8d8fe3793125d61f88"/>
+    <rdf:first rdf:nodeID="N91390c934d734afa87e75888a98b12d6"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasSuccedence">
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPart"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isPlaceInvolvedIn">
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParticipantIn"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N5fca41b175744ad9be825c07f8d7cf5b">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPart"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#contains">
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#overlaps"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isDefinedInAffordance">
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDefinedIn"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N63795566f3d44574bb73f9a1709b277e">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+    <owl:onClass rdf:nodeID="N7e99a39741244e099dbdad270bf6b4a6"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">2</owl:minQualifiedCardinality>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N2304ddb0e8e6466aba2ee8e8f668c730">
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    <rdf:first rdf:nodeID="N2c9dd15e28cd4088b184ae6829ff49f3"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N13ce8745c96544b5908e0c376b697a0c">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+    <owl:allValuesFrom rdf:nodeID="N75f429b536724e9680919e5667b369f6"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nd5edeefa907f4ffe8a1df2e797de363d">
+    <rdf:first rdf:nodeID="N5ff18ce69c5b4059bd217da5fb1a49ee"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationEntity"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SocialObject"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasTask">
+    <owl:inverseOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskOf"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nf7391195d21b4b88b0d24e1885abfb42">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nd69082863c2944018d6456dd3ae262dd">
+    <rdf:first rdf:nodeID="N3258a62c70e24c72946edbe794e8fd26"/>
+    <rdf:rest rdf:nodeID="N422d7cf2b0bb4f2e9285f12c947b4b93"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SocialObject"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasBindingRole">
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPart"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N44fe0e39ff8b468da5e51ca5784cbfec">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:nodeID="N670845c9d47243e5b5247b36f63a4a54"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isParameterDefinedIn">
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDefinedIn"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N5dd3421229a5484f94e03827ec482044">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <owl:intersectionOf rdf:nodeID="N17d2af7c45904fc294c414afb3922d57"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N7427b0c3f7c74957acbedcf59ac94b35">
+    <rdf:first rdf:nodeID="N401cc47835d949b987f42a0237f2c86b"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Na5c1319b8bd74b528e5baa89e625d9b0">
+    <rdf:first rdf:nodeID="N81c33c569f6048c6a5cd4d900bbd55eb"/>
+    <rdf:rest rdf:nodeID="Nd55394424b2343bea95cfcc499e673fe"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N3fdae3ba85384beb81ff6ab786c3adc0">
+    <rdf:first rdf:nodeID="Nacd08952d0a14feaa74a5f270df941ea"/>
+    <rdf:rest rdf:nodeID="Nc7e28d30578c434db538d260668ab406"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#before">
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#precedes"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N88e974df61a2467489649f12747647f4">
+    <rdf:first rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Plan"/>
+    <rdf:rest rdf:nodeID="N2cfece8495c74849a6578f7031f0519f"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N0adc87c6cb38458fa02065225157ca02">
+    <owl:intersectionOf rdf:nodeID="N46da9276f9634574a318214778cade11"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N442a26006ee740e3b7ccbdacfe476e5e">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPart"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nc27b9aa0448344a99fd41e6f024a239e">
+    <rdf:first rdf:nodeID="N6de146e087024f89a42a5735458f7df5"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasTask">
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPart"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nd7fa2b4bd6e64a52ad1981138222b15a">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+    <owl:allValuesFrom rdf:nodeID="N15499d68bf55485281f784c7c1ce64b3"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl/hasRequiredInitialSituation">
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPrecondition"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N2bc2f392d9a34cb6957b7ea69a8a4fcc">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+    <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ImperativeClause"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N435cec0b14e841b99019b5dcf9d1e7b8">
+    <rdf:first rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Na3773a0521cf4d24a2e0069079f273ef">
+    <rdf:rest rdf:nodeID="N71c9a69f45c04714b782d4e1692ab0f1"/>
+    <rdf:first rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N625b33c2c5d344c4903167328791d533">
+    <rdf:first rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
+    <rdf:rest rdf:nodeID="Na31d6decf286434282071e88022f494b"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#coOccurs">
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#overlaps"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N465e1bf1f3f346b09554dde9e9dc2205">
+    <rdf:rest rdf:nodeID="N1d4cf05337024e3b9d10ace65763a330"/>
+    <rdf:first rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nb96d4d46125b4d8f93d0b335572d3cf9">
+    <rdf:first rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
+    <rdf:rest rdf:nodeID="N459b1591451b41c09d24da25ed3bade2"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nec21bfc5c5b34c04a8e2666ba3f3eeea">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasSuccessor">
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPart"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isEventTypeDefinedIn">
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDefinedIn"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasChildLink">
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N1ab492d2d1514b688ef0e186c7fb0852">
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    <rdf:first rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SocialObject"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isOccurringIn">
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N80cb89c657b549c894f12ade259426e2">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#MentalAction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Na3760ec4f1cf4024bf16967d45792fe6">
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    <rdf:first rdf:nodeID="N0b34ef9d42c344e1ac13d723909fff8d"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Na2078d6e121a447a90eb06b04cad92de">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPart"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Region"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nf61ac9a19632414dae6306175034683e">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <owl:intersectionOf rdf:nodeID="N197646496b2f45eca72ff4bfe94661b9"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N74eda8a425364c6987fe4dbc01d4fa57">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <owl:intersectionOf rdf:nodeID="Nf55c46bf3ffe4205abf19cf3fb7ac46e"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nedc56df2fb584303a7029eae03b5886a">
+    <rdf:first rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+    <rdf:rest rdf:nodeID="N15b197e259674dbaa75dfeb345b964dd"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#defines">
+    <owl:inverseOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDefinedIn"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ned54515f81894b0b9f9b42b100ccb3ea">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+    <owl:allValuesFrom rdf:nodeID="Nee38e0501f264441b2e05019c534142a"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N90e291f296c0499fa54ef826c7dc2141">
+    <rdf:first rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#causesTransition"/>
+    <rdf:rest rdf:nodeID="Nbcd83df37b544a98ac95fc30cf582de9"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N65ed701685f841f8b3ffc6f8e50872e6">
+    <rdf:first rdf:nodeID="N785bd580861247ebb9a09e10ee188cb6"/>
+    <rdf:rest rdf:nodeID="N855535dcbe3d4f408537ad8edf371402"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N7f94e6308cc744fd9efaef3eaa665cde">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPart"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N266075ab3b564bb2904448dcb9c833b2">
+    <rdf:first rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ModifyingPhysicalObject">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#PhysicalTask"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N6218244645b54ccdbb5f457952e5ba69">
+    <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPart"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:someValuesFrom rdf:nodeID="Nbc5d7786f0bc4990b9ec1f14a4ddbe78"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isAgentInvolvedIn">
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParticipantIn"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N209734363c2c475cb9efeee8f2831e6f">
+    <rdf:first rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N1a04bf0576d44f338caf4f471f3e5652">
+    <rdf:rest rdf:nodeID="N2f3fbbd399b1484dabcaa32e68e9bbe7"/>
+    <rdf:first rdf:nodeID="N0d729d166b554b448279c8818da9ec63"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isInsideOf">
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasLocation"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Na576ab6664b34ff6ab55e604d6e8ecf5">
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    <rdf:first rdf:nodeID="N9aae2a5a55fc4d66a7c2d7002014d205"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasLink">
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasComponent"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N68ecc912d496429db78e50e8a12becbe">
+    <rdf:first rdf:nodeID="Nbac8f6de4ef941489dcd988b8a5dc60c"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#involvesEffector">
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#involvesPlace">
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N7e15ebdd8fe248f4aefb6dace4377880">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <owl:intersectionOf rdf:nodeID="N0de1c0496bf24e3698da3d8c738c762e"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasParentLink">
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isRoleDefinedIn">
+    <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDefinedIn"/>
+  </rdf:Description>
+</rdf:RDF>

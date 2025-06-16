@@ -8,7 +8,7 @@
      xmlns:SOMA="http://www.ease-crc.org/ont/SOMA.owl#"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
     <owl:Ontology rdf:about="http://www.semanticweb.org/javi2/ontologies/2025/5/Ont_OCRA_and_SOMA">
-        <owl:imports rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl"/>
+        <owl:imports rdf:resource="http://www.ease-crc.org/ont/DUL.owl"/>
         <rdfs:comment>The DOLCE+DnS Ultralite ontology.
 It is a simplification of some parts of the DOLCE Lite-Plus library (cf. http://www.ontologydesignpatterns.org/ont/dul/DLP397.owl). 
 Main aspects in which DOLCE+DnS Ultralite departs from DOLCE Lite-Plus are the following:
